@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: e9de01cb2d7d68846a52abe34978f640
+  - enabled: 1
+    path: Assets/Scenes/OfficeScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/AlleyScene.unity
+    guid: 768b452bc23caad4fb2d62863db88f0d
+  - enabled: 1
+    path: Assets/Scenes/ApartmentScene.unity
+    guid: f6de4e66a5cf1204b84e0f2d2c9e5213
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/TransitionCutscenes/ApartmentToAlley.unity
+    guid: e4192d0740511ea458673149ef10c065
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/TransitionCutscenes/AlleyToApartment.unity
+    guid: a72c16f3868654a488b2e1b99f557fc3
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/TransitionCutscenes/ApartmentToOffice.unity
+    guid: 0f1b1531066a304499bd75ef35021779
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/TransitionCutscenes/OfficeToApartment.unity
+    guid: 777245c7b06e78d4796ccab591ae7bd5
+  m_configObjects: {}
