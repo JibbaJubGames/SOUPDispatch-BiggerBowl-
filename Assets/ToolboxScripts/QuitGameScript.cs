@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndOfDaySaveScript : MonoBehaviour
+public class QuitGameScript : MonoBehaviour
 {
-    public GameManager GameManager;
     // Start is called before the first frame update
     void Start()
     {
-        GameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
+        
     }
 
     // Update is called once per frame
@@ -17,8 +16,9 @@ public class EndOfDaySaveScript : MonoBehaviour
         
     }
 
-    public void EndOfDaySave()
+    public void QuitGame()
     {
-        GameManager.NextDay();
+        Application.Quit();
+        Debug.Log("Quitting Game Now");
     }
 }

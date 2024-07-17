@@ -9,14 +9,13 @@ public class HeroOptionRandomizationScript : MonoBehaviour
 
     [Header("Randomization Setup")]
     public  int selectedHeroesAmount;
-    [SerializeField] private int maxHeroesAmount;
+    [SerializeField] public int maxHeroesAmount;
     [SerializeField] public List<GameObject> chosenHeroes;
     [SerializeField] public List<int> chosenNumbers;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Just checking, this is called every time the scene loads");
         RandomizeHeroes();
     }
 
@@ -42,6 +41,7 @@ public class HeroOptionRandomizationScript : MonoBehaviour
             {
                 Debug.Log("Saved from a dupe hero");
             }
+
         }
     }
 
@@ -53,5 +53,10 @@ public class HeroOptionRandomizationScript : MonoBehaviour
             chosenHeroes.Add(HeroGuaranteeScript.necessaryHeroDays[GameManager.DayCounter]);
             selectedHeroesAmount++;
         }
+    }
+
+    public void ListNumberCheck(int heroCheck)
+    {
+        Debug.Log(chosenHeroes[heroCheck]);
     }
 }

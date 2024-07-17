@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ public class AudioManager : MonoBehaviour
     {
         SetSliders();
         AudioPrefInitialize();
+        SaveAndLoad.SetAudioPrefs();
     }
 
     private static void SetSliders()

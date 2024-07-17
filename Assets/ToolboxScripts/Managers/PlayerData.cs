@@ -71,9 +71,23 @@ public class SaveAndLoad : MonoBehaviour
         playerSave = JsonUtility.FromJson<PlayerData>(jsonSave);
         Debug.Log($"Successfully loaded the following information: {jsonSave}");
 
-        GameManager.LoadPlayerSave();
+        GameManager.SetPlayerSave();
 
-        SceneManager.LoadScene(0);
+        AudioManager.LoadAudioPrefs();
+
+        SceneManager.LoadScene("OfficeScene");
+
+    }
+
+    public static void SetAudioPrefs()
+    {
+        string jsonFilePath = Application.persistentDataPath + "/SaveData.json";
+        string jsonSave = System.IO.File.ReadAllText(jsonFilePath);
+
+        playerSave = JsonUtility.FromJson<PlayerData>(jsonSave);
+        Debug.Log($"Successfully loaded the following information: {jsonSave}");
+
+        GameManager.SetPlayerSave();
 
         AudioManager.LoadAudioPrefs();
     }

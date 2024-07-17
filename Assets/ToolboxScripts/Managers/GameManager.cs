@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour
 
     public static void LoadPlayerSave()
     {
+        SaveAndLoad.LoadFromJson();
+    }
+
+    public static void SetPlayerSave()
+    {
         DayCounter = SaveAndLoad.playerSave.DayCounter;
 
         FawnRelationCounter = SaveAndLoad.playerSave.FawnRelationCounter;
@@ -65,5 +70,23 @@ public class GameManager : MonoBehaviour
 
         SergeiRelationCounter = SaveAndLoad.playerSave.SergeiRelationCounter;
         SergeiRelationLevel = SaveAndLoad.playerSave.SergeiRelationLevel;
+    }
+
+    public static void NewGameSave()
+    {
+        DayCounter = 0;
+
+        FawnRelationCounter = 0;
+        FawnRelationLevel= 0;
+
+        RichardRelationCounter = 0;
+        RichardRelationLevel= 0;
+
+        SergeiRelationCounter = 0;
+        SergeiRelationLevel = 0;
+
+        SaveAndLoad.SaveToJson();
+
+        SaveAndLoad.LoadFromJson();
     }
 }
