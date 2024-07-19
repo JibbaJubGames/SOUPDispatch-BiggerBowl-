@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 78742023}
   - component: {fileID: 78742025}
   - component: {fileID: 78742024}
+  - component: {fileID: 78742026}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -198,6 +199,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78742022}
   m_CullTransparentMesh: 1
+--- !u!114 &78742026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78742022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93fe22e2ac1af943ba2d6cf06f5dc2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  earth: 0
+  lightning: 1
+  water: 0
+  fire: 0
+  chosenHerosElement: Fire
+  strength: 1
+  strategy: 0
+  speed: 0
+  chosenHerosSkill: Speed
+  tier: 3
+  chosenHerosTier: 1
 --- !u!1 &110702401
 GameObject:
   m_ObjectHideFlags: 0

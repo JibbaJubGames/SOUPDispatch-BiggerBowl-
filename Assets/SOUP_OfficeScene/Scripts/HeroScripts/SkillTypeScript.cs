@@ -5,9 +5,7 @@ using UnityEngine;
 public class SkillTypeScript : MonoBehaviour
 {
     [Header("Skill Archetype")]
-    public bool strength;
-    public bool strategy;
-    public bool speed;
+    public string skillType;
     // Start is called before the first frame update
     void Start()
     {

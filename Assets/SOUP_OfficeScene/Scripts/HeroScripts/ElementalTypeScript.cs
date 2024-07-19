@@ -5,11 +5,7 @@ using UnityEngine;
 public class ElementalTypeScript : MonoBehaviour
 {
     [Header("Elemental Archetype")]
-    public bool fire;
-    public bool earth;
-    public bool lightning;
-    public bool water;
-    public bool neutral;
+    public string elementalType;
     // Start is called before the first frame update
     void Start()
     {
