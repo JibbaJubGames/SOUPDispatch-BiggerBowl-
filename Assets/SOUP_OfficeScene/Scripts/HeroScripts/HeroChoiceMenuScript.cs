@@ -15,6 +15,7 @@ public class HeroChoiceMenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitialHeroChoice();
     }
 
     public void InitialHeroChoice()
@@ -27,6 +28,7 @@ public class HeroChoiceMenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void ShowNextHeroChoice()
@@ -43,6 +45,22 @@ public class HeroChoiceMenuScript : MonoBehaviour
         Destroy(heroToShow);
         heroToShow = Instantiate(referenceScript.chosenHeroes[selectedHeroes], spawnPoint.transform);
         Debug.Log($"Displaying {referenceScript.chosenHeroes[selectedHeroes]} at spawnpoint {selectedHeroes}");
+    }
+
+    public void HeroChoiceMade()
+    {
+        referenceScript.chosenHeroes.Remove(referenceScript.chosenHeroes[selectedHeroes]);
+        if (referenceScript.chosenHeroes.Count == 0)
+        {
+            Debug.Log("All heroes dispatched");
+            Destroy(heroToShow);
+            return;
+        }
+        else
+        {
+            selectedHeroes = 0;
+            InitialHeroChoice();
+        }       
     }
 
     public void SelectionSafetyCatchDown()

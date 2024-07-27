@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
 {
-    public int playerCashCount = 0;
+    public static int playerCashCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +17,10 @@ public class MoneyManager : MonoBehaviour
         
     }
 
-    public void UpdatePiggyBank()
+    public static void UpdatePiggyBank()
     {
-        playerCashCount += DispatchManager.perfectDispatchCount * 25;
-        playerCashCount += DispatchManager.goodDispatchCount * 10;
-        playerCashCount -= DispatchManager.badDispatchCount * 10;
+        playerCashCount += DispatchManager.perfectDispatchCount * 250;
+        playerCashCount += DispatchManager.goodDispatchCount * 100;
+        playerCashCount -= DispatchManager.badDispatchCount * 100;
     }
 }

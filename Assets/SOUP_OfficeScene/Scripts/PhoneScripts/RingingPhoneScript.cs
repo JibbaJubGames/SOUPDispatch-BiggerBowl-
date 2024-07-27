@@ -12,7 +12,7 @@ public class RingingPhoneScript : MonoBehaviour
     private int newCallerTime;
     private bool onCall = false;
 
-    public RandomCallerGenerator callerGeneration;
+    public DispatchConversationScript dispatchTalk;
 
     // Start is called before the first frame update
     void Start()
@@ -81,8 +81,8 @@ public class RingingPhoneScript : MonoBehaviour
     {
         phoneAnimController.SetTrigger("AnsweredCall");
         onCall = true;
-        callerGeneration.GenerateCaller();
         CallerPopTrigger.CallPopSwap();
+        dispatchTalk.GenerateDispatch();
         ringCountdown = 0;
     }
 

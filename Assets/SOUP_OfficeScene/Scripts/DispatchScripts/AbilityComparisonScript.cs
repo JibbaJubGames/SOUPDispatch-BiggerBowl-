@@ -25,9 +25,6 @@ public class AbilityComparisonScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CheckElement();
-        CheckSkill();
-        CompareTier();
     }
 
     // Update is called once per frame
@@ -54,44 +51,44 @@ public class AbilityComparisonScript : MonoBehaviour
     {
         if (chosenHerosElement == "Fire") 
         {
-            DispatchDeciderScript.PointCount("Win");
+            DispatchDeciderScript.PointCountUp();
         }
-        else if (chosenHerosElement == "lightning")
+        else if (chosenHerosElement == "lightning" || chosenHerosElement == "Neutral")
         {
-            DispatchDeciderScript.PointCount("Lose");
+            DispatchDeciderScript.PointCountDown();
         }
     }
     public void CompareLightning()
     {
         if (chosenHerosElement == "Earth") 
         {
-            DispatchDeciderScript.PointCount("Win");
+            DispatchDeciderScript.PointCountUp();
         }
-        else if (chosenHerosElement == "Water")
+        else if (chosenHerosElement == "Water" || chosenHerosElement == "Neutral")
         {
-            DispatchDeciderScript.PointCount("Lose");
+            DispatchDeciderScript.PointCountDown();
         }
     }
     public void CompareWater()
     {
         if (chosenHerosElement == "Lightning") 
         {
-            DispatchDeciderScript.PointCount("Win");
+            DispatchDeciderScript.PointCountUp();
         }
-        else if (chosenHerosElement == "Fire")
+        else if (chosenHerosElement == "Fire" || chosenHerosElement == "Neutral")
         {
-            DispatchDeciderScript.PointCount("Lose");
+            DispatchDeciderScript.PointCountDown();
         }
     }
     public void CompareFire()
     {
         if (chosenHerosElement == "Water") 
         {
-            DispatchDeciderScript.PointCount("Win");
+            DispatchDeciderScript.PointCountUp();
         }
-        else if (chosenHerosElement == "Earth")
+        else if (chosenHerosElement == "Earth" || chosenHerosElement == "Neutral")
         {
-            DispatchDeciderScript.PointCount("Lose");
+            DispatchDeciderScript.PointCountDown();
         }
     }
 
@@ -100,33 +97,34 @@ public class AbilityComparisonScript : MonoBehaviour
     {
         if (chosenHerosSkill == "Speed")
         {
-            DispatchDeciderScript.PointCount("Win");
+            DispatchDeciderScript.PointCountUp();
         }
         else if (chosenHerosSkill == "Strategy")
         {
-            DispatchDeciderScript.PointCount("Lose");
+            DispatchDeciderScript.PointCountDown();
         }
     }
     private void CompareStrategy()
     {
         if (chosenHerosSkill == "Strength")
         {
-            DispatchDeciderScript.PointCount("Win");
+            DispatchDeciderScript.PointCountUp();
         }
         else if (chosenHerosSkill == "Speed")
         {
-            DispatchDeciderScript.PointCount("Lose");
+            DispatchDeciderScript.PointCountDown();
         }
     }
     private void CompareSpeed()
     {
         if (chosenHerosSkill == "Strategy")
         {
-            DispatchDeciderScript.PointCount("Win");
+            DispatchDeciderScript.PointCountUp();
         }
         else if (chosenHerosSkill == "Strength")
         {
-            DispatchDeciderScript.PointCount("Lose");
+            DispatchDeciderScript.PointCountDown();
+            Debug.Log("hero lost in skill category");
         }
     }
 
