@@ -9,6 +9,7 @@ TagManager:
   - FXSlider
   - VoiceSlider
   - MusicSlider
+  - HeroCanvas
   layers:
   - Default
   - TransparentFX

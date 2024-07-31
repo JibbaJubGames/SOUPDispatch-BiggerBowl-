@@ -24,12 +24,20 @@ public class DispatchConversationScript : MonoBehaviour
     public int fillerSelection;
     public bool fillerUsed;
     public bool fillerAvailable;
+    public bool fillerStyleCaller;
+    public bool fillerActive;
+
+    public GameObject[] calmedText;
+    public int calmedSelection;
+
+    [Header("Animation Holder")]
+    public AnimTriggerScript buttonAnimations;
 
     // Start is called before the first frame update
     void Start()
     {
         //Figure out which day to start including filler
-        if (GameManager.DayCounter >= 0) fillerAvailable = true;
+        if (GameManager.DayCounter >= 0 && fillerStyleCaller) fillerAvailable = true;
     }
 
     // Update is called once per frame
@@ -47,34 +55,84 @@ public class DispatchConversationScript : MonoBehaviour
     public void AskedWho()
     {
         RunFiller();
-        whoSelection = Random.Range(0, whoseInvolved.Length);
-        dispatchConversation.text = whoseInvolved[whoSelection].GetComponent<StringHolder>().stringToHold;
+        if (fillerActive)
+        {
+            fillerSelection = Random.Range(0, fillerText.Length);
+            dispatchConversation.text = fillerText[fillerSelection].GetComponent<StringHolder>().stringToHold;
+        }
+        else
+        {
+            whoSelection = Random.Range(0, whoseInvolved.Length);
+            dispatchConversation.text = whoseInvolved[whoSelection].GetComponent<StringHolder>().stringToHold;
+            buttonAnimations.runTrigger("AskedWho");
+            whoseInvolved[whoSelection].GetComponent<SetDifficultyValues>().SetDifficultyPiece();
+        }
+        
     }
 
     public void AskedWhere()
     {
         RunFiller();
-        whereSelection = Random.Range (0, whereIsIt.Length);
-        dispatchConversation.text = whereIsIt[whereSelection].GetComponent<StringHolder>().stringToHold;
+        if (fillerActive)
+        {
+            fillerSelection = Random.Range(0, fillerText.Length);
+            dispatchConversation.text = fillerText[fillerSelection].GetComponent<StringHolder>().stringToHold;
+        }
+        else
+        {
+            whereSelection = Random.Range (0, whereIsIt.Length);
+            dispatchConversation.text = whereIsIt[whereSelection].GetComponent<StringHolder>().stringToHold;
+            buttonAnimations.runTrigger("AskedWhere");
+            whereIsIt[whereSelection].GetComponent<SetDifficultyValues>().SetDifficultyPiece();
+        }
+        
     }
 
     public void AskedWhat()
     {
         RunFiller();
-        whatSelection = Random.Range(0,whatsHappening.Length);
-        dispatchConversation.text = whatsHappening[whatSelection].GetComponent<StringHolder>().stringToHold;
+        if (fillerActive)
+        {
+            fillerSelection = Random.Range(0, fillerText.Length);
+            dispatchConversation.text = fillerText[fillerSelection].GetComponent<StringHolder>().stringToHold;
+        }
+        else
+        {
+            whatSelection = Random.Range(0,whatsHappening.Length);
+            dispatchConversation.text = whatsHappening[whatSelection].GetComponent<StringHolder>().stringToHold;
+            buttonAnimations.runTrigger("AskedWhat");
+            whatsHappening[whatSelection].GetComponent<SetDifficultyValues>().SetDifficultyPiece();
+        }
+        
+    }
+
+    public void AskedToCalm()
+    {
+        if (fillerActive)
+        {
+            calmedSelection = Random.Range(0, calmedText.Length);
+            dispatchConversation.text = calmedText[calmedSelection].GetComponent<StringHolder>().stringToHold;
+            buttonAnimations.runTrigger("AskedToCalm");
+            fillerActive = false;
+        }
+        else return;
     }
 
     public void RunFiller()
     {
-        if (fillerAvailable && !fillerUsed)
+        if (fillerAvailable && !fillerActive)
         {
-            int useFiller = Random.Range(1, 10);
+            int useFiller = Random.Range(1, 3);
             if (useFiller == 1)
             {
                 fillerSelection = Random.Range(0, fillerText.Length);
                 dispatchConversation.text = fillerText[fillerSelection].GetComponent<StringHolder>().stringToHold;
-                fillerUsed = true;
+                fillerActive = true;
+                if (fillerUsed)
+                {
+                    buttonAnimations.runTrigger("FreakingOut");
+                }
+                else fillerUsed = true;
             }
         }
         else return;
