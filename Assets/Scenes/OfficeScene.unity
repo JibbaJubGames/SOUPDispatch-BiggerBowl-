@@ -919,6 +919,7 @@ GameObject:
   - component: {fileID: 308982499}
   - component: {fileID: 308982500}
   - component: {fileID: 308982501}
+  - component: {fileID: 308982502}
   m_Layer: 0
   m_Name: AddressTracker
   m_TagString: Untagged
@@ -993,7 +994,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dced28fd41cd06469d2b4b9acf5f7a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background: {fileID: 0}
+  background: {fileID: 1101570617}
+--- !u!114 &308982502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308982497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fc002ef65f9744cbe66d5c80b4357e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedWinColor: {r: 0.05233179, g: 0.5283019, b: 0.10785216, a: 1}
 --- !u!1 &317583845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,8 +1800,8 @@ RectTransform:
   m_LocalScale: {x: 0.41666666, y: 0.41666666, z: 0.41666666}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 308982498}
   - {fileID: 1101570616}
+  - {fileID: 308982498}
   m_Father: {fileID: 1264990021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3879,7 +3893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1101570616
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6313,7 +6327,6 @@ GameObject:
   - component: {fileID: 1733411501}
   - component: {fileID: 1733411500}
   - component: {fileID: 1733411502}
-  - component: {fileID: 1733411503}
   m_Layer: 5
   m_Name: TrackerScreen
   m_TagString: Untagged
@@ -6420,19 +6433,6 @@ MonoBehaviour:
   selectedMaze: {fileID: 0}
   mazeChoice: 0
   mazeScreenCenter: {fileID: 1733411499}
---- !u!114 &1733411503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733411498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9fc002ef65f9744cbe66d5c80b4357e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializedWinColor: {r: 0.05233179, g: 0.5283019, b: 0.10785216, a: 1}
 --- !u!1 &1748422807
 GameObject:
   m_ObjectHideFlags: 0
