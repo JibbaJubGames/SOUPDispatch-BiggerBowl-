@@ -11,7 +11,9 @@ public class CheckFailScript : MonoBehaviour
     public static Image[] staticStrikes = new Image[3];
 
     public Sprite failedStrike;
-    public static Sprite staticStrike;
+    public static Sprite staticFailedStrike;
+    public Sprite greyStrike;
+    public static Sprite staticGreyStrike;
 
     public static Animator statusAnim;
     // Start is called before the first frame update
@@ -21,7 +23,8 @@ public class CheckFailScript : MonoBehaviour
         staticStrikes[1] = strikes[1];
         staticStrikes[2] = strikes[2];
 
-        staticStrike = failedStrike;
+        staticFailedStrike = failedStrike;
+        staticGreyStrike = greyStrike;
 
         statusAnim = GetComponent<Animator>();
     }
@@ -53,18 +56,24 @@ public class CheckFailScript : MonoBehaviour
     {
         if (strikeCount == 1)
         {
-            staticStrikes[0].sprite = staticStrike;
+            staticStrikes[0].sprite = staticFailedStrike;
             Debug.Log("Strike one should be red");
         }
         else if (strikeCount == 2)
         {
-            staticStrikes[1].sprite = staticStrike;
+            staticStrikes[1].sprite = staticFailedStrike;
             Debug.Log("Strike two should be red");
         }
         else if (strikeCount == 3)
         {
-            staticStrikes[2].sprite = staticStrike;
+            staticStrikes[2].sprite = staticFailedStrike;
             Debug.Log("Strike three should be red");
+        }
+        else if (strikeCount == 0)
+        {
+            staticStrikes[0].sprite = staticGreyStrike;
+            staticStrikes[1].sprite = staticGreyStrike;
+            staticStrikes[2].sprite = staticGreyStrike;
         }
     }
 }

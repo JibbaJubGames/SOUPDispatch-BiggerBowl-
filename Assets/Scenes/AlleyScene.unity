@@ -1294,9 +1294,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerText: {fileID: 2063527062}
   speakerDialogue:
-  - Hey there, welcome to Cafe De La Nuit, how can I help ya?
-  - Sure thing! Just let me know what you'd like and I'll get that started for you,
-    'kay?
+  - Welcome to Average Joe's Cuppa Joe, where our Joe is made with mo'...
+  - Sure thing, let's find the Joe that suits your flow! Ugh...
   - 
   - --- Demo Conversation Start ---
   - Well, I guess since this is the demo we should show off some conversation, huh?
@@ -2814,11 +2813,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Computers
+  m_text: 'Computer
 
-    R
-
-    Cool'
+    Comrades'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3899,11 +3896,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cafe
+  m_text: 'Average Joe''s
 
-    De La
-
-    Nuit'
+    Cuppa Joe'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6602,9 +6597,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Super Awesome
+  m_text: 'Pulaski''s
 
-    Not A Nerd
+    Powerhouse
 
     Comics'
   m_isRightToLeft: 0
