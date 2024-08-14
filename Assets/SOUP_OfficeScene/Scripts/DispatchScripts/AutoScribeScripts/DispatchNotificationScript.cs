@@ -17,7 +17,10 @@ public class DispatchNotificationScript : MonoBehaviour
 
     [Header("Dispatch Image Holders")]
     public Image dispatchNotif;
-    public Image endDispatch;
+    public Button endDispatch;
+
+    [Header("Chat Clear Script")]
+    public AutoscribeConvoScript clearChatScript;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +64,9 @@ public class DispatchNotificationScript : MonoBehaviour
             dispatchNotif.gameObject.SetActive(false);
             dispatchActive = true;
             dispatchWaiting = false;
-            endDispatch.gameObject.SetActive(true);
+
+            DispatchDetailGeneratorScript.GenerateDispatch();
+            //To Do: Create function to generate new dispatch
         }
         else return;
     }
@@ -70,9 +75,18 @@ public class DispatchNotificationScript : MonoBehaviour
     {
         if (dispatchActive)
         {
+            PlayerResponses.ResetCallerTypeSetters();
             dispatchActive = false;
-            endDispatch.gameObject.SetActive(false);
-            //To Do: Create function to clear chat log
+            clearChatScript.ResetConvo();
+        }
+        else return;
+    }
+
+    public void CheckCloseButton()
+    {
+        if (dispatchActive)
+        {
+            endDispatch.gameObject.SetActive(true);
         }
         else return;
     }
