@@ -41,7 +41,6 @@ public class HeroOptionRandomizationScript : MonoBehaviour
             {
                 Debug.Log("Saved from a dupe hero");
             }
-
         }
     }
 
@@ -50,7 +49,7 @@ public class HeroOptionRandomizationScript : MonoBehaviour
         if (HeroGuaranteeScript.necessaryHeroDays.ContainsKey(GameManager.DayCounter))
         {
             Debug.Log("This is a start!");
-            chosenHeroes.Add(HeroGuaranteeScript.necessaryHeroDays[GameManager.DayCounter]);
+            //chosenHeroes.Add(HeroGuaranteeScript.necessaryHeroDays[GameManager.DayCounter]);
             selectedHeroesAmount++;
         }
     }

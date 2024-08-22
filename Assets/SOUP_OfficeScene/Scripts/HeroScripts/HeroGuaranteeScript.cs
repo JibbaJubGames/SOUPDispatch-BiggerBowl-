@@ -7,10 +7,10 @@ public class HeroGuaranteeScript : MonoBehaviour
     public bool initialized = false;
 
     [SerializeField]
-     public static Dictionary<int, GameObject> necessaryHeroDays = new Dictionary<int, GameObject>();
+     public static Dictionary<int, int> necessaryHeroDays = new Dictionary<int, int>();
 
     [SerializeField]
-    public GameObject[] heroesThatWillBeNecessary;
+    public int[] heroesThatWillBeNecessary;
 
 
     private void Awake()

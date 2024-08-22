@@ -9,7 +9,8 @@ TagManager:
   - FXSlider
   - VoiceSlider
   - MusicSlider
-  - HeroCanvas
+  - HODApp
+  - NotesApp
   layers:
   - Default
   - TransparentFX

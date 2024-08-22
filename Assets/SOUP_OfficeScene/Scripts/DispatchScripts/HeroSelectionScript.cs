@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeroSelectionScript : MonoBehaviour
 {
-    [SerializeField] private HeroChoiceMenuScript availableHeroes;
+   // [SerializeField] private HeroChoiceMenuScript availableHeroes;
     [SerializeField] private AbilityComparisonScript abilityCheck;
     // Start is called before the first frame update
     void Start()
@@ -21,12 +21,12 @@ public class HeroSelectionScript : MonoBehaviour
 
     public void ChooseThisHero()
     {
-        abilityCheck.chosenHerosTier = availableHeroes.heroToShow.GetComponent<TierLevelScript>().tier;
-        abilityCheck.CompareTier();
-        abilityCheck.chosenHerosSkill = availableHeroes.heroToShow.GetComponent<SkillTypeScript>().skillType;
-        abilityCheck.CheckSkill();
-        abilityCheck.chosenHerosElement = availableHeroes.heroToShow.GetComponent<ElementalTypeScript>().elementalType;
-        abilityCheck.CheckElement();
-        DispatchDeciderScript.CompareWinOrLoss();
+    //    abilityCheck.chosenHerosTier = availableHeroes.heroToShow.GetComponent<TierLevelScript>().tier;
+    //    abilityCheck.CompareTier();
+    //    abilityCheck.chosenHerosSkill = availableHeroes.heroToShow.GetComponent<SkillTypeScript>().skillType;
+    //    abilityCheck.CheckSkill();
+    //    abilityCheck.chosenHerosElement = availableHeroes.heroToShow.GetComponent<ElementalTypeScript>().elementalType;
+    //    abilityCheck.CheckElement();
+    //    DispatchDeciderScript.CompareWinOrLoss();
     }
 }

@@ -16,6 +16,9 @@ public class CheckFailScript : MonoBehaviour
     public static Sprite staticGreyStrike;
 
     public static Animator statusAnim;
+
+    public PlayerResponses addressTrigger;
+    public DispatchTimerBar dispatchStatus;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,10 +50,23 @@ public class CheckFailScript : MonoBehaviour
         {
             Debug.Log("We failed :(");
             statusAnim.SetTrigger("FailedMaze");
-            //To do: 
         }
         else Debug.Log($"Strike {strikeCount}");
     }
+
+    public void FailedMazePlayerResponse()
+    {
+        addressTrigger.AddressMinigameResult(0);
+    }
+
+    //(Add in again based on player input during playtests)
+    //public void RetryMaze()
+    //{
+    //    if (dispatchStatus.dispatchTimer.value > 0)
+    //    {
+    //        statusAnim.SetTrigger("AddressUnknown");
+    //    }
+    //}
 
     public static void UpdateStrikeCount()
     {

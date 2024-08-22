@@ -9,6 +9,8 @@ public class CheckWinScript : MonoBehaviour
     public static Color winColor;
 
     public static Animator statusAnim;
+
+    public PlayerResponses addressTrigger;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,5 +32,10 @@ public class CheckWinScript : MonoBehaviour
             statusAnim.SetTrigger("BeatMaze");
         }
         else return;
+    }
+
+    public void BeatMazePlayerResponse()
+    {
+        addressTrigger.AddressMinigameResult(1);
     }
 }

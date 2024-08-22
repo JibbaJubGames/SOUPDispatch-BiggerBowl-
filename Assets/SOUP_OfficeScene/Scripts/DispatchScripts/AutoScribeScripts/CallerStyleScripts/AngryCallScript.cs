@@ -11,6 +11,8 @@ public class AngryCallScript : MonoBehaviour
     public GameObject[] whoseInvolvedLines;
     public GameObject[] fillerLines;
     public GameObject[] calmedDownLines;
+    public GameObject[] impatientLines;
+    public float impatienceCounter;
 
     public bool fillerActive = false;
 
@@ -29,6 +31,11 @@ public class AngryCallScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void Impatience()
+    {
+
     }
 
     public void Greetings()

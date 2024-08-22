@@ -14,13 +14,15 @@ public class DispatchNotificationScript : MonoBehaviour
     public int dispatchWaitTime;
     public int maxDispatchWaitTime;
     public float dispatchTimer = 0;
+    public DispatchTimerBar timeLimit;
 
     [Header("Dispatch Image Holders")]
     public Image dispatchNotif;
     public Button endDispatch;
 
-    [Header("Chat Clear Script")]
+    [Header("Chat Setup Scripts")]
     public AutoscribeConvoScript clearChatScript;
+    public PlayerResponses chatSetupScript;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +68,8 @@ public class DispatchNotificationScript : MonoBehaviour
             dispatchWaiting = false;
 
             DispatchDetailGeneratorScript.GenerateDispatch();
-            //To Do: Create function to generate new dispatch
+            timeLimit.ResetDispatchTimer();
+            chatSetupScript.PlayerGreeting();
         }
         else return;
     }

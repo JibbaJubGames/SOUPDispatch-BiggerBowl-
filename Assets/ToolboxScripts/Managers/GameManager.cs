@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [Header("Basics")] 
     public static int DayCounter;
 
+    public static int playerEnergy = 5;
+
     [Header("Relationships")]
     public static int FawnRelationCounter;
     public static int FawnRelationLevel;
@@ -39,11 +41,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         Debug.Log($"We are on day {DayCounter}");
-        if (Input.GetKeyDown(KeyCode.Escape)) { SaveAndLoad.SaveToJson(); }        
+        //if (Input.GetKeyDown(KeyCode.Escape)) { SaveAndLoad.SaveToJson(); }        
 
-        if (Input.GetKeyDown(KeyCode.Return)) { SaveAndLoad.LoadFromJson(); }
+        //if (Input.GetKeyDown(KeyCode.Return)) { SaveAndLoad.LoadFromJson(); }
     }
 
     public void NextDay()
