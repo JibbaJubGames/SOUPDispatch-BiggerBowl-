@@ -7,13 +7,16 @@ public class DailyHeroOptionsScript : MonoBehaviour
     [Header("Hero Options")]
     public GameObject[] heroOptions;
     public int shownHero = 0;
+    private Animator chosenHeroAnim;
 
     [Header("Set Up")]
     public int heroChoices;
     public List<int> chosenHeroesToday;
+    public DispatchNotificationScript notifReset;
 
     public int maxHeroOptions;
 
+    private bool choseHeroForDispatch;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,12 +39,27 @@ public class DailyHeroOptionsScript : MonoBehaviour
 
     public void ChooseHeroForDispatch()
     {
+        if (!choseHeroForDispatch)
+        {
+            choseHeroForDispatch = true;
+            DispatchMatchupSetup.SetHeroElement(heroOptions[chosenHeroesToday[shownHero]].gameObject.GetComponent<ElementalTypeScript>().elementalType);
+            DispatchMatchupSetup.SetHeroElement(heroOptions[chosenHeroesToday[shownHero]].gameObject.GetComponent<SkillTypeScript>().skillType);
+            DispatchVictoryCheckerScript.CompareVictory();
+            heroOptions[chosenHeroesToday[shownHero]].GetComponent<Animator>().SetTrigger("ChoseHero");
+            Invoke("AfterHeroBounceAnim", 0.75f);
+        }
+        else Debug.Log("Already chose a hero!");
+    }
+
+    public void AfterHeroBounceAnim()
+    {
         heroOptions[chosenHeroesToday[shownHero]].gameObject.SetActive(false);
         chosenHeroesToday.Remove(chosenHeroesToday[shownHero]);
-        Debug.Log("We got here");
+        notifReset.EndedDispatch();
+        choseHeroForDispatch = false;
         shownHero = 0;
-        Debug.Log("Then we got here");
         heroOptions[chosenHeroesToday[shownHero]].gameObject.SetActive(true);
+        
     }
 
     public void SafetyCatchUp()

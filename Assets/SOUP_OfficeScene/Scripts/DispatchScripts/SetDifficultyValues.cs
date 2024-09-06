@@ -21,15 +21,8 @@ public class SetDifficultyValues : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetDifficultyPiece()
     {
-        dispatchDifficulty = GameObject.FindGameObjectWithTag("HeroCanvas").GetComponent<AbilityComparisonScript>();
         ResetElement();
         SetElement();
         ResetSkill();
@@ -42,15 +35,15 @@ public class SetDifficultyValues : MonoBehaviour
         {
             if (strategy)
             {
-                dispatchDifficulty.strategy = true;
+                DispatchMatchupSetup.SetDispatchSkill("Strength");
             }
             else if (strength)
             {
-                dispatchDifficulty.strength = true;
+                DispatchMatchupSetup.SetDispatchSkill("Speed");
             }
             else if (speed)
             {
-                dispatchDifficulty.speed = true;
+                DispatchMatchupSetup.SetDispatchSkill("Strategy");
             }
         }
         else
@@ -61,9 +54,7 @@ public class SetDifficultyValues : MonoBehaviour
 
     private void ResetSkill()
     {
-        dispatchDifficulty.strategy = false;
-        dispatchDifficulty.strength = false;
-        dispatchDifficulty.speed = false;
+        DispatchMatchupSetup.DispatchElement = null;
     }
 
     private void SetElement()
@@ -72,19 +63,19 @@ public class SetDifficultyValues : MonoBehaviour
         {
             if (earth)
             {
-                dispatchDifficulty.earth = true;
+                DispatchMatchupSetup.SetDispatchElement("Fire");
             }
             else if (lightning)
             {
-                dispatchDifficulty.lightning = true;
+                DispatchMatchupSetup.SetDispatchElement("Earth");
             }
             else if (water)
             {
-                dispatchDifficulty.water = true;
+                DispatchMatchupSetup.SetDispatchElement("Lightning");
             }
             else if (fire)
             {
-                dispatchDifficulty.fire = true;
+                DispatchMatchupSetup.SetDispatchElement("Water");
             }
         }
         else
@@ -95,9 +86,6 @@ public class SetDifficultyValues : MonoBehaviour
 
     private void ResetElement()
     {
-        dispatchDifficulty.earth = false;
-        dispatchDifficulty.lightning = false;
-        dispatchDifficulty.water = false;
-        dispatchDifficulty.fire = false;
+        DispatchMatchupSetup.DispatchSkill = null;
     }
 }

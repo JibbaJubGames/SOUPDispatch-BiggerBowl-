@@ -12,6 +12,10 @@ public class ScaredCallScript : MonoBehaviour
     public GameObject[] fillerLines;
     public GameObject[] calmedDownLines;
 
+    private static bool askedWhere = false;
+    private static bool askedWho = false;
+    private static bool askedWhat = false;
+
     public bool fillerActive = false;
 
     public int optionSelection;
@@ -41,11 +45,13 @@ public class ScaredCallScript : MonoBehaviour
     public void EmergencyInfo()
     {
         RunFiller();
-        if (!fillerActive)
+        if (!fillerActive && !askedWhat)
         {
             optionSelection = Random.Range(0, emergencyLines.Length);
             textForConvo = emergencyLines[optionSelection].GetComponent<StringHolder>().stringToHold;
+            emergencyLines[optionSelection].GetComponent<SetDifficultyValues>().SetDifficultyPiece();
             convoHolder.SendAutoscribeMessage(textForConvo);
+            askedWhat = true;
         }
         else return;
     }
@@ -53,12 +59,13 @@ public class ScaredCallScript : MonoBehaviour
     public void AddressInfo()
     {
         RunFiller();
-        if (!fillerActive)
+        if (!fillerActive && !askedWhere)
         {
             if (DispatchDetailGeneratorScript.knowsAddress)
             {
                 optionSelection = Random.Range(0, addressLines.Length);
                 textForConvo = addressLines[optionSelection].GetComponent<StringHolder>().stringToHold;
+                //addressLines[optionSelection].GetComponent<SetDifficultyValues>().SetDifficultyPiece();
                 convoHolder.SendAutoscribeMessage(textForConvo);
             }
             else if (!DispatchDetailGeneratorScript.knowsAddress)
@@ -68,6 +75,7 @@ public class ScaredCallScript : MonoBehaviour
                 convoHolder.SendAutoscribeMessage(textForConvo);
                 playerChat.FindAddress();
             }
+            askedWhere = true;
         }
         else return;
     }
@@ -75,11 +83,13 @@ public class ScaredCallScript : MonoBehaviour
     public void WhoseThereInfo()
     {
         RunFiller();
-        if (!fillerActive)
+        if (!fillerActive && !askedWho)
         {
             optionSelection = Random.Range(0, whoseInvolvedLines.Length);
             textForConvo = whoseInvolvedLines[optionSelection].GetComponent<StringHolder>().stringToHold;
+            //whoseInvolvedLines[optionSelection].GetComponent<SetDifficultyValues>().SetDifficultyPiece();
             convoHolder.SendAutoscribeMessage(textForConvo);
+            askedWho = true;
         }
         else return;
     }
@@ -99,7 +109,7 @@ public class ScaredCallScript : MonoBehaviour
     public void RunFiller()
     {
         int fillerChance = Random.Range(0, 10);
-        if (fillerChance > 4)
+        if (fillerChance > 7)
         {
             Debug.Log("Looking for filler");
             optionSelection = Random.Range(0, fillerLines.Length);
@@ -108,5 +118,12 @@ public class ScaredCallScript : MonoBehaviour
             fillerActive = true;
         }
         else return;
+    }
+
+    public static void QuestionsReset()
+    {
+        askedWho = false;
+        askedWhere = false;
+        askedWhat = false;
     }
 }

@@ -10,6 +10,11 @@ public class CalmCallScript : MonoBehaviour
     public GameObject[] unknownAddressLines;
     public GameObject[] whoseInvolvedLines;
 
+
+    private static bool askedWhere = false;
+    private static bool askedWho = false;
+    private static bool askedWhat = false;
+
     public int optionSelection;
     public static string textForConvo;
 
@@ -36,17 +41,25 @@ public class CalmCallScript : MonoBehaviour
 
     public void EmergencyInfo()
     {
+        if (!askedWhat)
+        {
             optionSelection = Random.Range(0, emergencyLines.Length);
             textForConvo = emergencyLines[optionSelection].GetComponent<StringHolder>().stringToHold;
+            emergencyLines[optionSelection].GetComponent<SetDifficultyValues>().SetDifficultyPiece();
             convoHolder.SendAutoscribeMessage(textForConvo);
+        }
+            
     }
 
     public void AddressInfo()
     {
+        if (!askedWhere)
+        {
             if (DispatchDetailGeneratorScript.knowsAddress)
             {
                 optionSelection = Random.Range(0, addressLines.Length);
                 textForConvo = addressLines[optionSelection].GetComponent<StringHolder>().stringToHold;
+                //addressLines[optionSelection].GetComponent<SetDifficultyValues>().SetDifficultyPiece();
                 convoHolder.SendAutoscribeMessage(textForConvo);
             }
             else if (!DispatchDetailGeneratorScript.knowsAddress)
@@ -56,14 +69,26 @@ public class CalmCallScript : MonoBehaviour
                 convoHolder.SendAutoscribeMessage(textForConvo);
                 playerChat.FindAddress();
             }
+            askedWhere = true;
+        }
     }
 
     public void WhoseThereInfo()
     {
+        if (!askedWho)
         {
             optionSelection = Random.Range(0, whoseInvolvedLines.Length);
             textForConvo = whoseInvolvedLines[optionSelection].GetComponent<StringHolder>().stringToHold;
+            //whoseInvolvedLines[optionSelection].GetComponent<SetDifficultyValues>().SetDifficultyPiece();
             convoHolder.SendAutoscribeMessage(textForConvo);
+            askedWho = true;
         }
+    }
+
+    public static void QuestionsReset()
+    {
+        askedWho = false;
+        askedWhere = false;
+        askedWhat = false;
     }
 }

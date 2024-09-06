@@ -42,10 +42,6 @@ public class PlayerResponses : MonoBehaviour
 
     private void Update()
     {
-        if (dispatchInfo.dispatchActive) 
-        {
-        
-        }
     }
 
     private void Impatience()
@@ -302,8 +298,14 @@ public class PlayerResponses : MonoBehaviour
     public static void ResetCallerTypeSetters()
     {
         angryCallerSetter = false;
+        AngryCallScript.QuestionsReset();
+
         calmCallerSetter = false;
+        CalmCallScript.QuestionsReset();
+
         scaredCallerSetter = false;
+        ScaredCallScript.QuestionsReset();
+
         toThePointCallerSetter = false;
     }
 }

@@ -9,7 +9,7 @@ public class OpenApplication : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindApp();
+        InitialFindApp();
     }
 
     // Update is called once per frame
@@ -18,11 +18,17 @@ public class OpenApplication : MonoBehaviour
         
     }
 
-    public void FindApp()
+    public void InitialFindApp()
+    {
+        RuntimeFindApp();
+        appPlayerIsUsing[0].gameObject.SetActive(false);
+    }
+
+    public void RuntimeFindApp()
     {
         appPlayerIsUsing = GameObject.FindGameObjectsWithTag(tagToFind);
+        Debug.Log("The app attached to this button is" + appPlayerIsUsing[0].name);
         appPlayerIsUsing[0] = appPlayerIsUsing[0].transform.parent.gameObject.transform.parent.gameObject;
-        appPlayerIsUsing[0].gameObject.SetActive(false);
     }
 
     public void OpenApp()
@@ -41,7 +47,7 @@ public class OpenApplication : MonoBehaviour
         else
         {
             Debug.Log("App became NULL");
-            FindApp();
+            InitialFindApp();
         }
         
     }

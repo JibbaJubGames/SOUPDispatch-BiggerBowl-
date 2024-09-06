@@ -8,6 +8,7 @@ public class DispatchNotificationScript : MonoBehaviour
     [Header("Dispatch Info")]
     public bool dispatchWaiting;
     public bool dispatchActive;
+    public Animator autoScribeAnim;
 
     [Header("Dispatch Countdown Info")]
     public bool dispatchWaitTimeSet;
@@ -15,6 +16,7 @@ public class DispatchNotificationScript : MonoBehaviour
     public int maxDispatchWaitTime;
     public float dispatchTimer = 0;
     public DispatchTimerBar timeLimit;
+    public Button endChatButton;
 
     [Header("Dispatch Image Holders")]
     public Image dispatchNotif;
@@ -23,11 +25,11 @@ public class DispatchNotificationScript : MonoBehaviour
     [Header("Chat Setup Scripts")]
     public AutoscribeConvoScript clearChatScript;
     public PlayerResponses chatSetupScript;
+    public Animator addressTrackerAnim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -41,21 +43,24 @@ public class DispatchNotificationScript : MonoBehaviour
 
     public void NewDispatch()
     {
-        if (!dispatchWaitTimeSet)
+        if (DailyClockScript.clockedIn)
         {
-            dispatchWaitTime = Random.Range(0, maxDispatchWaitTime);
-            dispatchWaitTimeSet = true;
+            if (!dispatchWaitTimeSet)
+            {
+                dispatchWaitTime = Random.Range(0, maxDispatchWaitTime);
+                dispatchWaitTimeSet = true;
 
-        }
-        dispatchTimer += Time.deltaTime;
-        Debug.Log($"Dispatch timer is currently at: {dispatchTimer}");
-        if (dispatchTimer > dispatchWaitTime)
-        {
-            Debug.Log("Made it here");
-            dispatchNotif.gameObject.SetActive(true);
-            dispatchWaiting = true;
-            dispatchWaitTimeSet = false;
-            dispatchTimer = 0;
+            }
+            dispatchTimer += Time.deltaTime;
+            Debug.Log($"Dispatch timer is currently at: {dispatchTimer}");
+            if (dispatchTimer > dispatchWaitTime)
+            {
+                Debug.Log("Made it here");
+                dispatchNotif.gameObject.SetActive(true);
+                dispatchWaiting = true;
+                dispatchWaitTimeSet = false;
+                dispatchTimer = 0;
+            }
         }
     }
 
@@ -80,7 +85,14 @@ public class DispatchNotificationScript : MonoBehaviour
         {
             PlayerResponses.ResetCallerTypeSetters();
             dispatchActive = false;
+            autoScribeAnim.SetTrigger("ClosedAutoScribe");
+            endDispatch.gameObject.SetActive(false);
             clearChatScript.ResetConvo();
+            if (addressTrackerAnim.GetCurrentAnimatorStateInfo(0).IsName("NeedAddressTracker"))
+            {
+                addressTrackerAnim.SetTrigger("TrackerUnused");
+            }
+            else return;
         }
         else return;
     }

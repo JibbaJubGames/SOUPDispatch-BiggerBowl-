@@ -20,8 +20,8 @@ public class DispatchTimerBar : MonoBehaviour
     {
         if (dispatchStatus.dispatchActive && dispatchTimer.value >= 0)
         {
-            dispatchTimer.value -= Time.deltaTime / (GameManager.playerEnergy * 24);
-            if (dispatchTimer.value <= 0) Debug.Log("Slider empty");
+            dispatchTimer.value -= Time.deltaTime / (GameManager.playerEnergy * 12);
+            if (dispatchTimer.value <= 0) dispatchStatus.EndedDispatch();
         }
         else return;
     }

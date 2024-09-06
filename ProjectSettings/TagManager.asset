@@ -11,6 +11,12 @@ TagManager:
   - MusicSlider
   - HODApp
   - NotesApp
+  - EmailApp
+  - HODAppButton
+  - NotesAppButton
+  - EmailAppButton
+  - HandbookAppButton
+  - HandbookApp
   layers:
   - Default
   - TransparentFX
