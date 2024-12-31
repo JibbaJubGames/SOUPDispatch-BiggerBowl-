@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +20,18 @@ public class SceneSwapScript : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        if (GameManager.DayCounter == 10 && SceneManager.GetActiveScene().name == "OfficeScene")
+        {
+            SceneManager.LoadScene(10);
+        }
+        else
+        {
         SceneManager.LoadScene(sceneName);
-        Debug.Log($"Loading {sceneName} scene");
+        }
+    }
+
+    public void CheckForCutscene(string sceneName)
+    {
+        CutsceneManager.CheckCutscene(sceneName);
     }
 }

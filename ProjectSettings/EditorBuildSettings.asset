@@ -29,4 +29,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cutscenes/TransitionCutscenes/OfficeToApartment.unity
     guid: 777245c7b06e78d4796ccab591ae7bd5
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/StoryCutscenes/Day1Cutscene_TheInterview.unity
+    guid: ca558d466be08bf418d327553a59846a
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/StoryCutscenes/Day4Cutscene_APromotionOfSorts.unity
+    guid: 93cd37d865b5acb41a60284c22b56d49
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/StoryCutscenes/Day10Cutscene_AnOfferYouCantRefuse.unity
+    guid: 6ab53e4a6a907fa4e948aa4a632a666d
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/StoryCutscenes/Day14Cutscene_CheckForLosers.unity
+    guid: 288cb7fc66b07084fa27672996499ba5
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/StoryCutscenes/Day25Cutscene_DaveRevealed.unity
+    guid: 34a062bc375ed4e4da77fec58a6bf8fd
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/EndingCutscenes/EndingCutscene_DaveDefeatsAllEnding.unity
+    guid: d42e03b8144164b4a9b2715008546ab8
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/EndingCutscenes/EndingCutscene_DaveDefeatedEnding.unity
+    guid: 8065277cae8761f4b9d2ccf9e638eb94
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/CreditsScene/CreditsScene.unity
+    guid: 74856ccb40495a14e8836f2a61c3c275
   m_configObjects: {}

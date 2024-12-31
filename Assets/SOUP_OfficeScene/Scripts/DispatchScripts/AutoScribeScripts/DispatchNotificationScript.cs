@@ -35,7 +35,7 @@ public class DispatchNotificationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!dispatchWaiting && !dispatchActive)
+        if (!dispatchWaiting && !dispatchActive && GameManager.DayCounter >= 4)
         {
             NewDispatch();
         }

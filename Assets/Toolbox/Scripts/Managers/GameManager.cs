@@ -25,9 +25,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Tutorials")]
     public static bool seenEnergyTutorial;
-
-    //TEMPORARY UNTIL TUTORIAL IS IMPLEMENTED FULLY
     public static bool seenDesktopTutorial;
+
+    [Header("Emails")]
+    public static int emailCount;
 
     private void Awake()
     {
@@ -80,11 +81,14 @@ public class GameManager : MonoBehaviour
         SergeiRelationLevel = SaveAndLoad.playerSave.SergeiRelationLevel;
 
         seenEnergyTutorial = SaveAndLoad.playerSave.seenEnergyTutorial;
+        seenDesktopTutorial = SaveAndLoad.playerSave.seenDesktopTutorial;
+
+        emailCount = SaveAndLoad.playerSave.emailCount;
     }
 
     public static void NewGameSave()
     {
-        DayCounter = 0;
+        DayCounter = 1;
 
         FawnRelationCounter = 0;
         FawnRelationLevel= 0;
@@ -96,6 +100,9 @@ public class GameManager : MonoBehaviour
         SergeiRelationLevel = 0;
 
         seenEnergyTutorial = false;
+        seenDesktopTutorial = false;
+
+        emailCount = 0;
 
         SaveAndLoad.SaveToJson();
 

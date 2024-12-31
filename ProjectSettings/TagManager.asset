@@ -17,6 +17,10 @@ TagManager:
   - EmailAppButton
   - HandbookAppButton
   - HandbookApp
+  - InternetApp
+  - InternetAppButton
+  - WebsiteHolder
+  - ResultsPage
   layers:
   - Default
   - TransparentFX

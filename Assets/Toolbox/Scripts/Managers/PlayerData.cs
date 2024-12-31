@@ -25,6 +25,10 @@ public class PlayerData
 
     [Header("Tutorials")]
     public bool seenEnergyTutorial;
+    public bool seenDesktopTutorial;
+
+    [Header("Emails")]
+    public int emailCount;
 }
 
 public class SaveAndLoad : MonoBehaviour
@@ -59,6 +63,9 @@ public class SaveAndLoad : MonoBehaviour
             musicVolume = AudioManager.musicVolume,
 
             seenEnergyTutorial = GameManager.seenEnergyTutorial,
+            seenDesktopTutorial = GameManager.seenDesktopTutorial,
+
+            emailCount = GameManager.emailCount,
         };
         string jsonSave = JsonUtility.ToJson(playerSave);
         Debug.Log($"Successfully saved the following information: {jsonSave}");
@@ -80,8 +87,9 @@ public class SaveAndLoad : MonoBehaviour
 
         AudioManager.LoadAudioPrefs();
 
-        SceneManager.LoadScene("OfficeScene");
+        CutsceneManager.CheckCutscene("OfficeScene");
 
+        EmailManager.SetEmailInbox();
     }
 
     public static void SetAudioPrefs()

@@ -3289,7 +3289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b5defe08e66fe4d9dd1513f35504ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyTutorial: {fileID: 415006138}
+  tutorialToDisplay: {fileID: 0}
 --- !u!114 &678955752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4977,7 +4977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b5defe08e66fe4d9dd1513f35504ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyTutorial: {fileID: 415006138}
+  tutorialToDisplay: {fileID: 415006138}
 --- !u!1 &1227743785
 GameObject:
   m_ObjectHideFlags: 0
