@@ -88,8 +88,6 @@ public class SaveAndLoad : MonoBehaviour
         AudioManager.LoadAudioPrefs();
 
         CutsceneManager.CheckCutscene("OfficeScene");
-
-        EmailManager.SetEmailInbox();
     }
 
     public static void SetAudioPrefs()

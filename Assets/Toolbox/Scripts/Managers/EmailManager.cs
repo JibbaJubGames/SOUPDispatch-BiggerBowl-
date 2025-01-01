@@ -43,7 +43,6 @@ public class EmailManager : MonoBehaviour
             {
                 Debug.Log("Our inbox already contains Email " +  i);
                 InboxFiller.AddToInboxPile(EmailManagerInstance.storyEmailPrefabs[i]);
-                return;
             }
             else
             {

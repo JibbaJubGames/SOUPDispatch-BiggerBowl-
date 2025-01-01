@@ -6,6 +6,11 @@ public class InboxFiller : MonoBehaviour
 {
     public static Stack <GameObject> inboxPile = new Stack<GameObject>();
 
+
+    private void Awake()
+    {
+        EmailManager.SetEmailInbox();
+    }
     // Start is called before the first frame update
     void Start()
     {

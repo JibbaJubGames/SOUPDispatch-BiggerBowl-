@@ -35,7 +35,8 @@ public class DispatchNotificationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!dispatchWaiting && !dispatchActive && GameManager.DayCounter >= 4)
+        //Add this after !dispatchActive once the email dispatches are working;  && GameManager.DayCounter >= 4
+        if (!dispatchWaiting && !dispatchActive)
         {
             NewDispatch();
         }
