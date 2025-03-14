@@ -19,6 +19,9 @@ public class PlayerData
     public int SergeiRelationCounter;
     public int SergeiRelationLevel;
 
+    public int BettyRelationCounter;
+    public int BettyRelationLevel;
+
     public float effectsVolume;
     public float voicesVolume;
     public float musicVolume;
@@ -29,6 +32,11 @@ public class PlayerData
 
     [Header("Emails")]
     public int emailCount;
+
+    [Header("Finances")]
+    public int moneyInWallet;
+
+    //[Header("Fallen Heroes")]
 }
 
 public class SaveAndLoad : MonoBehaviour
@@ -57,6 +65,9 @@ public class SaveAndLoad : MonoBehaviour
 
             SergeiRelationCounter = GameManager.SergeiRelationCounter,
             SergeiRelationLevel = GameManager.SergeiRelationLevel,
+            
+            BettyRelationCounter = GameManager.BettyRelationCounter,
+            BettyRelationLevel = GameManager.BettyRelationLevel,
 
             effectsVolume = AudioManager.effectsVolume,
             voicesVolume = AudioManager.voiceVolume,
@@ -66,6 +77,8 @@ public class SaveAndLoad : MonoBehaviour
             seenDesktopTutorial = GameManager.seenDesktopTutorial,
 
             emailCount = GameManager.emailCount,
+
+            moneyInWallet = GameManager.moneyInWallet,
         };
         string jsonSave = JsonUtility.ToJson(playerSave);
         Debug.Log($"Successfully saved the following information: {jsonSave}");

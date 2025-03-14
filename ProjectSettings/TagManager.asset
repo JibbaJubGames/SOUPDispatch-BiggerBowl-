@@ -21,6 +21,7 @@ TagManager:
   - InternetAppButton
   - WebsiteHolder
   - ResultsPage
+  - DraggableSlot
   layers:
   - Default
   - TransparentFX

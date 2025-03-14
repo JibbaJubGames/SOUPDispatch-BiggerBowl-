@@ -8,8 +8,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("DevConsole")]
+    public GameObject DevConsole;
+    public bool DevConsoleOpen = false;
+
+    public static bool allComicsUnlocked = false;
+    public static bool allEndingsUnlocked = false;
+    public static bool allCompSkinsUnlocked = false;
+
     [Header("Basics")] 
-    public static int DayCounter;
+    public static int DayCounter = 1;
 
     public static int playerEnergy = 5;
 
@@ -23,12 +31,20 @@ public class GameManager : MonoBehaviour
     public static int SergeiRelationCounter;
     public static int SergeiRelationLevel;
 
+    public static int BettyRelationCounter;
+    public static int BettyRelationLevel;
+
     [Header("Tutorials")]
     public static bool seenEnergyTutorial;
     public static bool seenDesktopTutorial;
 
     [Header("Emails")]
     public static int emailCount;
+
+    [Header("Finances")]
+    public static int moneyInWallet;
+
+    //[Header("Fallen Heroes")]
 
     private void Awake()
     {
@@ -52,6 +68,12 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape) && Input.GetKey(KeyCode.LeftShift))
         {
             SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.C))
+        {
+            DevConsole.SetActive(true);
+            DevConsoleOpen = true;
         }
     }
 
@@ -80,10 +102,16 @@ public class GameManager : MonoBehaviour
         SergeiRelationCounter = SaveAndLoad.playerSave.SergeiRelationCounter;
         SergeiRelationLevel = SaveAndLoad.playerSave.SergeiRelationLevel;
 
+        BettyRelationCounter = SaveAndLoad.playerSave.BettyRelationCounter;
+        BettyRelationLevel = SaveAndLoad.playerSave.BettyRelationLevel;
+
         seenEnergyTutorial = SaveAndLoad.playerSave.seenEnergyTutorial;
         seenDesktopTutorial = SaveAndLoad.playerSave.seenDesktopTutorial;
 
         emailCount = SaveAndLoad.playerSave.emailCount;
+
+        moneyInWallet = SaveAndLoad.playerSave.moneyInWallet;
+
     }
 
     public static void NewGameSave()
@@ -99,10 +127,15 @@ public class GameManager : MonoBehaviour
         SergeiRelationCounter = 0;
         SergeiRelationLevel = 0;
 
+        BettyRelationCounter = 0;
+        BettyRelationLevel = 0;
+
         seenEnergyTutorial = false;
         seenDesktopTutorial = false;
 
         emailCount = 0;
+
+        moneyInWallet = 0;
 
         SaveAndLoad.SaveToJson();
 

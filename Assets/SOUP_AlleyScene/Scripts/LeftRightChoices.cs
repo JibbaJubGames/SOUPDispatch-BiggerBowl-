@@ -7,17 +7,27 @@ using UnityEngine.UI;
 public class LeftRightChoices : MonoBehaviour
 {
     [Header("Shop Choices")]
-    [SerializeField] private Sprite[] ItemsToPurchase;
-    [SerializeField] private string[] ItemNames;
-    [SerializeField] private string[] ItemDescription;
+    [SerializeField] public Animator ItemsToPurchase;
+    [SerializeField] public string[] AnimTriggers;
+    [SerializeField] public string[] ItemDescription;
+    [SerializeField] public string[] ItemNames;
+    [SerializeField] public int[] ItemPrices;
+    [SerializeField] public int[] CoffeeEnergyBonus;
 
     [Header("Shop Holders")]
-    [SerializeField] private Image CurrentChoiceImage;
-    [SerializeField] private TMP_Text CurrentChoiceName;
-    [SerializeField] private TMP_Text CurrentChoiceDescription;
+    [SerializeField] public TMP_Text CurrentChoicePrice;
+    [SerializeField] public TMP_Text CurrentChoiceName;
+    [SerializeField] public TMP_Text CurrentChoiceDescription;
 
     [Header("Detail Holders")]
-    [SerializeField] private int CurrentSelectionNumber;
+    [SerializeField] public int CurrentSelectionNumber;
+
+    [Header("Safety Lock")]
+    private float clickLockTimer;
+    private float clickLockThreshold = 0.5f;
+    private bool clickLockActive;
+    public Button nextChoiceButton;
+    public Button prevChoiceButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +38,17 @@ public class LeftRightChoices : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (clickLockActive)
+        {
+            clickLockTimer += Time.deltaTime;
+            if (clickLockTimer > clickLockThreshold)
+            {
+                nextChoiceButton.interactable = true;
+                prevChoiceButton.interactable = true;
+                clickLockActive = false;
+                clickLockTimer = 0;
+            }
+        }
     }
 
     public void ResetMenu()
@@ -39,32 +59,42 @@ public class LeftRightChoices : MonoBehaviour
 
     public void NextChoice()
     {
-        CurrentSelectionNumber++;
-        SafetyMeasure();
-        UpdateChoice();
+        if (!clickLockActive)
+        {
+            nextChoiceButton.interactable = false;
+            clickLockActive = true;
+            CurrentSelectionNumber++;
+            SafetyMeasure();
+            UpdateChoice();
+        }
     }
     public void PreviousChoice()
     {
-        CurrentSelectionNumber--;
-        SafetyMeasure();
-        UpdateChoice();
+        if (!clickLockActive)
+        {
+            prevChoiceButton.interactable = false;
+            clickLockActive = true;
+            CurrentSelectionNumber--;
+            SafetyMeasure();
+            UpdateChoice();
+        }
     }
 
     private void SafetyMeasure()
     {
-        if (CurrentSelectionNumber > ItemsToPurchase.Length-1)
+        if (CurrentSelectionNumber > ItemNames.Length-1)
         {
             CurrentSelectionNumber = 0;
         }
         else if (CurrentSelectionNumber < 0)
         {
-            CurrentSelectionNumber = ItemsToPurchase.Length - 1;
+            CurrentSelectionNumber = ItemNames.Length - 1;
         }
     }
 
     private void UpdateChoice()
     {
-        CurrentChoiceImage.sprite = ItemsToPurchase[CurrentSelectionNumber];
+        CurrentChoicePrice.text = $"${ItemPrices[CurrentSelectionNumber].ToString()}";
         CurrentChoiceName.text = ItemNames[CurrentSelectionNumber];
         CurrentChoiceDescription.text = ItemDescription[CurrentSelectionNumber];
     }
