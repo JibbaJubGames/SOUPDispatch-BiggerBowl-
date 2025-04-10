@@ -22,6 +22,7 @@ TagManager:
   - WebsiteHolder
   - ResultsPage
   - DraggableSlot
+  - DraggableReset
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - BlackDrops
   - 
   - 
   - 

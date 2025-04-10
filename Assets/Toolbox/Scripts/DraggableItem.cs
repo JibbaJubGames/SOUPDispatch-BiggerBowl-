@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Vector3 itemHome;
+    public Vector3 originalHome;
     public DraggableSlot slot;
 
     private void Start()
@@ -15,7 +16,17 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        itemHome = this.transform.position;
+        if (!ChosenHeroInfoHolder.holdingHero)
+        {
+            itemHome = this.transform.position;
+            originalHome = this.transform.position;
+            if (this.GetComponent<Image>() != null)
+            {
+                Image img = this.GetComponent<Image>();
+                img.raycastTarget = false;
+            }
+            ChosenHeroInfoHolder.holdingHero = true;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -26,6 +37,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.position = itemHome;
+
+        if (this.GetComponent<Image>() != null)
+        {
+            
+        }
         if (slot != null && !slot.occupiedSpot) 
             {
                 slot.occupiedSpot = true;
@@ -34,9 +50,12 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 this.transform.position = itemHome;
                 this.GetComponent<Button>().interactable = false;
                 this.GetComponent<DraggableItem>().enabled = false;
+                Image img = this.GetComponent<Image>();
+                img.raycastTarget = false;
+            slot.gameObject.GetComponent<RandomCallerDispatchLocationCheck>().autoscribe.EndedDispatch();
             }
-        Debug.Log("Stopped Drag");
         this.GetComponent<Animator>().SetTrigger("Normal");
+        ChosenHeroInfoHolder.holdingHero = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,7 +63,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (collision.gameObject.tag == "DraggableSlot")
         {
             slot = collision.GetComponent<DraggableSlot>();
-            Debug.Log("Hit a draggable spot");
+        }
+        else if (collision.gameObject.tag == "DraggableReset")
+        {
+            slot = null;
+            itemHome = originalHome;
         }
     }
 

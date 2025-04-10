@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenuScene.unity
     guid: e9de01cb2d7d68846a52abe34978f640
   - enabled: 1
-    path: Assets/Scenes/OfficeScene.unity
+    path: Assets/Scenes/OldOfficeScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/AlleyScene.unity
@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cutscenes/CreditsScene/CreditsScene.unity
     guid: 74856ccb40495a14e8836f2a61c3c275
+  - enabled: 1
+    path: Assets/Scenes/OfficeScene.unity
+    guid: 578178577c00eb24584c7e7e5e7781af
   m_configObjects: {}
