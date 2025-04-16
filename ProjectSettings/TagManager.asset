@@ -9,20 +9,12 @@ TagManager:
   - FXSlider
   - VoiceSlider
   - MusicSlider
-  - HODApp
-  - NotesApp
-  - EmailApp
-  - HODAppButton
-  - NotesAppButton
-  - EmailAppButton
-  - HandbookAppButton
-  - HandbookApp
-  - InternetApp
-  - InternetAppButton
-  - WebsiteHolder
-  - ResultsPage
-  - DraggableSlot
-  - DraggableReset
+  - SwitchDrag
+  - InvalidSpace
+  - ValidSpace
+  - LeftDrawer
+  - CenterDrawer
+  - RightDrawer
   layers:
   - Default
   - TransparentFX
