@@ -21,6 +21,9 @@ public class HeroProfileMovement : MonoBehaviour, IPointerEnterHandler, IPointer
     [SerializeField] private Transform deskParent;
     [SerializeField] private UsableSpaceScript spaceLock;
 
+    [Header("ProfileReset")]
+    [SerializeField] private Transform heroFolders;
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -34,14 +37,10 @@ public class HeroProfileMovement : MonoBehaviour, IPointerEnterHandler, IPointer
         }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        this.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-    }
-
     public void OnDrag(PointerEventData eventData)
     {
         this.transform.position = Input.mousePosition;
+        this.transform.SetAsLastSibling();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -80,6 +79,11 @@ public class HeroProfileMovement : MonoBehaviour, IPointerEnterHandler, IPointer
                 this.transform.localScale = deskScale;
                 this.transform.SetParent(deskParent, true);
                 inDrawer = false;
+                for (int i = 0;  i < heroFolders.childCount; i++) 
+                {
+                    heroFolders.GetChild(i).GetComponent<HeroFolderHoverScript>().heroProfileShowing = false;
+                }
+                HeroHolderLockScript.heroLocked = false;
             }
         }
     }

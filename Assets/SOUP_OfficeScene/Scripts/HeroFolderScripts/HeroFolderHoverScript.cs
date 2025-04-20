@@ -8,8 +8,8 @@ public class HeroFolderHoverScript : MonoBehaviour
     [SerializeField] private Sprite hoveredSprite;
     [SerializeField] private Sprite regularSprite;
     [SerializeField] private GameObject heroProfile;
-    [SerializeField] private Transform heroProfileSlot;
-    [SerializeField] private bool heroProfileShowing;
+    [SerializeField] public Transform heroProfileSlot;
+    [SerializeField] public bool heroProfileShowing;
     // Start is called before the first frame update
     void Start()
     {

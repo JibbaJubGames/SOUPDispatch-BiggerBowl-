@@ -49,14 +49,10 @@ public class HandbookMovement : MonoBehaviour, IPointerEnterHandler, IPointerExi
         }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        this.transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
-    }
-
     public void OnDrag(PointerEventData eventData)
     {
         this.transform.position = Input.mousePosition;
+        this.transform.SetAsLastSibling();
     }
 
     public void OnEndDrag(PointerEventData eventData)
