@@ -15,6 +15,9 @@ TagManager:
   - LeftDrawer
   - CenterDrawer
   - RightDrawer
+  - DispatchTube
+  - HeroProfile
+  - DispatchSheet
   layers:
   - Default
   - TransparentFX

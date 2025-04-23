@@ -20,6 +20,7 @@ public class HeroProfileMovement : MonoBehaviour, IPointerEnterHandler, IPointer
     [SerializeField] private Quaternion deskRotation;
     [SerializeField] private Transform deskParent;
     [SerializeField] private UsableSpaceScript spaceLock;
+    [SerializeField] private bool inTube;
 
     [Header("ProfileReset")]
     [SerializeField] private Transform heroFolders;
@@ -45,8 +46,13 @@ public class HeroProfileMovement : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!onDesk && !inDrawer)
+        if (!onDesk && !inDrawer && !inTube)
         {
+            Destroy(this.gameObject);
+        }
+        else if (inTube)
+        {
+            DispatchTubeContentsChecker.profileGiven = true;
             Destroy(this.gameObject);
         }
         else if (!spaceLock.withinValidSpace)
@@ -86,6 +92,12 @@ public class HeroProfileMovement : MonoBehaviour, IPointerEnterHandler, IPointer
                 HeroHolderLockScript.heroLocked = false;
             }
         }
+        else if (collision.CompareTag("DispatchTube") && onDesk)
+        {
+            Debug.Log("Trying to dispatch a hero");
+            onDesk = false;
+            inTube = true;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -114,6 +126,12 @@ public class HeroProfileMovement : MonoBehaviour, IPointerEnterHandler, IPointer
                 animToUse.SetTrigger(desiredTrigger);
                 onDesk = true;
             }
+        }
+        else if (collision.CompareTag("DispatchTube") && inTube)
+        {
+            Debug.Log("Changed mind about dispatching hero");
+            onDesk = true;
+            inTube = false;
         }
     }
 
