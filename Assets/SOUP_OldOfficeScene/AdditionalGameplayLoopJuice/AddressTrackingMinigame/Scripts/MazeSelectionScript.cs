@@ -12,7 +12,6 @@ public class MazeSelectionScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SelectMaze();
     }
 
     // Update is called once per frame

@@ -50,21 +50,21 @@ public class TextSettingScript : MonoBehaviour
     private void ApartmentToAlleyText()
     {
         topText.text = "Not ready for bed...";
-        bottomText.text = "(PLAYERNAME) went out into town!";
+        bottomText.text = $"{GameManager.PlayerName} went out into town!";
     }
     private void AlleyToApartmentText()
     {
         topText.text = "Finished with their night out";
-        bottomText.text = "(PLAYERNAME) made their way home!";
+        bottomText.text = $"{GameManager.PlayerName} made their way home!";
     }
     private void ApartmentToOfficeText()
     {
         topText.text = "Ready to save more lives...";
-        bottomText.text = "(PLAYERNAME) heads into the office!";
+        bottomText.text = $"{GameManager.PlayerName} heads into the office!";
     }
     private void OfficeToApartmentText()
     {
         topText.text = "After a long day of being a desk hero...";
-        bottomText.text = "(PLAYERNAME) goes home for some well deserved rest!";
+        bottomText.text = $"{GameManager.PlayerName} goes home for some well deserved rest!";
     }
 }

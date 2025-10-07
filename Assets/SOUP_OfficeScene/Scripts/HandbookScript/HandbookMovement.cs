@@ -6,10 +6,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HandbookMovement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler
+public class HandbookMovement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [Header("Desk and Drawer Switch")]
-    [SerializeField] private Animator animToUse;
+    [SerializeField] private Animator usableDrawers;
+    [SerializeField] private Animator hoverDrawers;
     [SerializeField] private bool onDesk;
     [SerializeField] private bool inDrawer;
     [SerializeField] private string switchToDesk;
@@ -23,30 +24,57 @@ public class HandbookMovement : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private UsableSpaceScript spaceLock;
     [SerializeField] private Sprite deskImage;
 
-    [Header("")]
-    public TMP_Text handbookTitle;
-    public TMP_Text handbookDescription;
-
     [Header("Drawer Info")]
     [SerializeField] private Vector3 drawerScale;
     [SerializeField] private Quaternion drawerRotation;
     [SerializeField] private Transform drawerParent;
+    [SerializeField] private Sprite drawerImage;
     [SerializeField] private int drawerXMin;
     [SerializeField] private int drawerXMax;
     [SerializeField] private int drawerYMin;
     [SerializeField] private int drawerYMax;
+    [SerializeField] private int rotateZMin;
+    [SerializeField] private int rotateZMax;
 
+    [Header("Focused Info")]
+    [SerializeField] private Sprite focusedSprite;
+    [SerializeField] private Transform focusedSpaceOne;
+    [SerializeField] private Transform focusedSpaceTwo;
+    [SerializeField] private bool dragging;
+    [SerializeField] private bool focused;
+    [SerializeField] private HandbookPages bookContents;
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        if (onDesk)
+        if (focused)
         {
-            this.transform.localScale = deskScale;
+            if (this.transform.parent.name == "FocusSpaceOne")
+            {
+                FocusHolders.focusSpaceOneFull = false;
+            }
+            if (this.transform.parent.name == "FocusSpaceTwo")
+            {
+                FocusHolders.focusSpaceTwoFull = false;
+            }
+            if (usableDrawers.GetCurrentAnimatorStateInfo(0).IsName("LeftDrawerOpen"))
+            {
+                onDesk = false;
+                inDrawer = true;
+                this.GetComponent<Image>().sprite = drawerImage;
+                this.transform.SetParent(drawerParent, false);
+                this.transform.localScale = drawerScale;
+                this.transform.rotation = drawerRotation;
+            }
+            else
+            {
+                this.GetComponent<Image>().sprite = deskImage;
+                this.transform.SetParent(deskParent);
+                this.transform.localScale = deskScale;
+            }
         }
-        else
-        {
-            this.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f); 
-        }
+        dragging = true;
+        focused = false;
+        bookContents.CloseBook();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -64,12 +92,11 @@ public class HandbookMovement : MonoBehaviour, IPointerEnterHandler, IPointerExi
                 this.transform.SetParent(drawerParent, false);
                 int placementX = Random.Range(drawerXMin, drawerXMax);
                 int placementY = Random.Range(drawerYMin, drawerYMax);
+                int rotationZ = Random.Range(rotateZMin, rotateZMax);
                 this.transform.localPosition = new Vector3 (placementX, placementY, 0);
-                this.GetComponent<Image>().sprite = null;
-                //Temp Functions below
-                this.GetComponent<Image>().color = Color.yellow;
-                handbookTitle.color = Color.black;
-                handbookDescription.color = Color.black;
+                drawerRotation = new Quaternion (0, 0, -rotationZ, 180);
+                this.transform.rotation = drawerRotation;
+                this.GetComponent<Image>().sprite = drawerImage;
                 inDrawer = true;
         }
         else if (inDrawer)
@@ -80,37 +107,26 @@ public class HandbookMovement : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             this.transform.position = spaceLock.draggingPosition;
         }
+        dragging = false;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (!onDesk)
-        {
-            this.transform.localScale = new Vector3(1, 1, 1);
-        }
-        else
-        {
-            return;
-        }
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("SwitchDrag"))
         {
-            if (!onDesk)
+            if (dragging)
             {
-                onDesk = true;
-                string desiredTrigger = switchToDesk;
-                animToUse.SetTrigger (desiredTrigger);
-                this.transform.rotation = deskRotation;
-                this.transform.localScale = deskScale;
-                this.transform.SetParent(deskParent, true);
-                this.GetComponent<Image>().sprite = deskImage;
-                //Temp Functions below
-                this.GetComponent<Image>().color = Color.white;
-                handbookTitle.color = Color.clear;
-                handbookDescription.color = Color.clear;
-                inDrawer = false;
+                if (!onDesk)
+                {
+                    onDesk = true;
+                   // string desiredTrigger = switchToDesk;
+                   // usableDrawers.SetTrigger(desiredTrigger);
+                    this.transform.rotation = deskRotation;
+                    this.transform.localScale = deskScale;
+                    this.transform.SetParent(deskParent, true);
+                    this.GetComponent<Image>().sprite = deskImage;
+                    inDrawer = false;
+                }
             }
         }
     }
@@ -119,13 +135,14 @@ public class HandbookMovement : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if (collision.CompareTag("LeftDrawer"))
         {
+            Debug.Log("Putting book in left drawer");
             if (onDesk)
             {
                 onDesk = false;
-                if (!animToUse.GetCurrentAnimatorStateInfo(0).IsName("LeftDrawerHover"))
+                if (!hoverDrawers.GetCurrentAnimatorStateInfo(0).IsName("LeftDrawerHover"))
                 {
                 string desiredTrigger = openDrawer;
-                animToUse.SetTrigger(desiredTrigger);
+                hoverDrawers.SetTrigger(desiredTrigger);
                 }
             }
         }
@@ -135,11 +152,97 @@ public class HandbookMovement : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if (collision.CompareTag("LeftDrawer"))
         {
-            if (animToUse.GetCurrentAnimatorStateInfo(0).IsName("LeftDrawerHover") && !inDrawer)
+            if (hoverDrawers.GetCurrentAnimatorStateInfo(0).IsName("LeftDrawerHover") && !inDrawer)
             {
                 string desiredTrigger = closeDrawer;
-                animToUse.SetTrigger(desiredTrigger);
+                hoverDrawers.SetTrigger(desiredTrigger);
                 onDesk = true;
+            }
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            Debug.Log("Right clicked this item");
+        }
+        if (!dragging && onDesk)
+        {
+            if (!focused)
+            {
+                if (FocusHolders.focusSpaceOneFull && FocusHolders.focusSpaceTwoFull)
+                {
+                    return;
+                }
+                else if (eventData.button == PointerEventData.InputButton.Right && !FocusHolders.focusSpaceTwoFull)
+                {
+                    FocusHolders.focusSpaceTwoFull = true;
+                    spaceLock.withinValidSpace = false;
+                    this.transform.SetParent(focusedSpaceTwo);
+                    this.GetComponent<Image>().sprite = focusedSprite;
+                    focused = true;
+                    this.transform.SetAsLastSibling();
+                    this.transform.localScale = new Vector3(3f, 5f, 1f);
+                    this.transform.localPosition = new Vector3(0, 0, 0);
+                    bookContents.OpenBook();
+                }
+                else if (eventData.button == PointerEventData.InputButton.Right && FocusHolders.focusSpaceTwoFull && !FocusHolders.focusSpaceOneFull)
+                {
+                    FocusHolders.focusSpaceOneFull = true;
+                    spaceLock.withinValidSpace = false;
+                    this.transform.SetParent(focusedSpaceOne);
+                    this.GetComponent<Image>().sprite = focusedSprite;
+                    focused = true;
+                    this.transform.SetAsLastSibling();
+                    this.transform.localScale = new Vector3(3f, 5f, 1f);
+                    this.transform.localPosition = new Vector3(0, 0, 0);
+                    bookContents.OpenBook();
+
+                }
+                else if (eventData.button == PointerEventData.InputButton.Left && !FocusHolders.focusSpaceOneFull)
+                {
+                    FocusHolders.focusSpaceOneFull = true;
+                    spaceLock.withinValidSpace = false;
+                    this.transform.SetParent(focusedSpaceOne);
+                    this.GetComponent<Image>().sprite = focusedSprite;
+                    focused = true;
+                    this.transform.SetAsLastSibling();
+                    this.transform.localScale = new Vector3(3f, 5f, 1f);
+                    this.transform.localPosition = new Vector3(0, 0, 0);
+                    bookContents.OpenBook();
+                }
+                else if (eventData.button == PointerEventData.InputButton.Left && FocusHolders.focusSpaceOneFull && !FocusHolders.focusSpaceTwoFull)
+                {
+                    FocusHolders.focusSpaceTwoFull = true;
+                    spaceLock.withinValidSpace = false;
+                    this.transform.SetParent(focusedSpaceTwo);
+                    this.GetComponent<Image>().sprite = focusedSprite;
+                    focused = true;
+                    this.transform.SetAsLastSibling();
+                    this.transform.localScale = new Vector3(3f, 5f, 1f);
+                    this.transform.localPosition = new Vector3(0, 0, 0);
+                    bookContents.OpenBook();
+                }
+            }
+            else if (focused)
+            {
+                if (this.transform.parent.name == "FocusSpaceOne")
+                {
+                    FocusHolders.focusSpaceOneFull = false;
+                }
+                if (this.transform.parent.name == "FocusSpaceTwo")
+                {
+                    FocusHolders.focusSpaceTwoFull = false;
+                }
+                this.transform.SetParent(deskParent);
+                this.GetComponent<Image>().sprite = deskImage;
+                focused = false;
+                this.transform.localScale = deskScale;
+                    this.transform.localPosition = new Vector3(-30, -200, 0);
+                
+                spaceLock.withinValidSpace = true;
+                bookContents.CloseBook();
             }
         }
     }

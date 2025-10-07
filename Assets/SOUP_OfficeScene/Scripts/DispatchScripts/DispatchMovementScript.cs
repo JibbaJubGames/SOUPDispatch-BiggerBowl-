@@ -13,10 +13,13 @@ public class DispatchMovementScript : MonoBehaviour, IBeginDragHandler, IDragHan
     [SerializeField] private Transform deskSpace;
     [SerializeField] private Transform focusedSpaceOne;
     [SerializeField] private Transform focusedSpaceTwo;
+    [SerializeField] private Transform offScreenHolder;
 
     [SerializeField] private bool inTube;
     [SerializeField] private bool focused;
     [SerializeField] private bool dragging;
+
+    [SerializeField] private GameObject[] focusOnly;
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (this.transform.parent.name == "FocusSpaceOne")
@@ -32,6 +35,12 @@ public class DispatchMovementScript : MonoBehaviour, IBeginDragHandler, IDragHan
         this.GetComponent<Image>().sprite = deskSprite;
         this.transform.SetParent(deskSpace);
         this.transform.localScale = Vector3.one;
+        this.transform.position = Vector3.zero;
+
+        for (int i = 0; i < focusOnly.Length; i++)
+        {
+            focusOnly[i].gameObject.SetActive(false);
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -44,8 +53,9 @@ public class DispatchMovementScript : MonoBehaviour, IBeginDragHandler, IDragHan
     {
         if (inTube)
         {
-            DispatchTubeContentsChecker.dispatchSheetGiven = true;
-            Destroy (this.gameObject);
+            DispatchTubeContentsChecker.dispatchSheetGiven = true; 
+            this.gameObject.transform.position = offScreenHolder.position;
+            this.transform.SetParent(offScreenHolder.gameObject.transform.parent, true);
         }
         else if (!spaceLock.withinValidSpace)
         {
@@ -64,7 +74,7 @@ public class DispatchMovementScript : MonoBehaviour, IBeginDragHandler, IDragHan
                 {
                     return;
                 }
-                else if (FocusHolders.focusSpaceOneFull && !FocusHolders.focusSpaceTwoFull)
+                else if (eventData.button == PointerEventData.InputButton.Right && !FocusHolders.focusSpaceTwoFull)
                 {
                     FocusHolders.focusSpaceTwoFull = true;
                     spaceLock.withinValidSpace = false;
@@ -74,8 +84,12 @@ public class DispatchMovementScript : MonoBehaviour, IBeginDragHandler, IDragHan
                     this.transform.SetAsLastSibling();
                     this.transform.localScale = new Vector3(3f, 5f, 1f);
                     this.transform.localPosition = new Vector3(0, 0, 0);
+                    for (int i = 0; i < focusOnly.Length; i++)
+                    {
+                        focusOnly[i].gameObject.SetActive(true);
+                    }
                 }
-                else if (!FocusHolders.focusSpaceOneFull)
+                else if (eventData.button == PointerEventData.InputButton.Right && FocusHolders.focusSpaceTwoFull && !FocusHolders.focusSpaceOneFull)
                 {
                     FocusHolders.focusSpaceOneFull = true;
                     spaceLock.withinValidSpace = false;
@@ -85,6 +99,41 @@ public class DispatchMovementScript : MonoBehaviour, IBeginDragHandler, IDragHan
                     this.transform.SetAsLastSibling();
                     this.transform.localScale = new Vector3(3f, 5f, 1f);
                     this.transform.localPosition = new Vector3(0, 0, 0);
+                    for (int i = 0; i < focusOnly.Length; i++)
+                    {
+                        focusOnly[i].gameObject.SetActive(true);
+                    }
+
+                }
+                else if (eventData.button == PointerEventData.InputButton.Left && !FocusHolders.focusSpaceOneFull)
+                {
+                    FocusHolders.focusSpaceOneFull = true;
+                    spaceLock.withinValidSpace = false;
+                    this.transform.SetParent(focusedSpaceOne);
+                    this.GetComponent<Image>().sprite = focusedSprite;
+                    focused = true;
+                    this.transform.SetAsLastSibling();
+                    this.transform.localScale = new Vector3(3f, 5f, 1f);
+                    this.transform.localPosition = new Vector3(0, 0, 0);
+                    for (int i = 0; i < focusOnly.Length; i++)
+                    {
+                        focusOnly[i].gameObject.SetActive(true);
+                    }
+                }
+                else if (eventData.button == PointerEventData.InputButton.Left && FocusHolders.focusSpaceOneFull && !FocusHolders.focusSpaceTwoFull)
+                {
+                    FocusHolders.focusSpaceTwoFull = true;
+                    spaceLock.withinValidSpace = false;
+                    this.transform.SetParent(focusedSpaceTwo);
+                    this.GetComponent<Image>().sprite = focusedSprite;
+                    focused = true;
+                    this.transform.SetAsLastSibling();
+                    this.transform.localScale = new Vector3(3f, 5f, 1f);
+                    this.transform.localPosition = new Vector3(0, 0, 0);
+                    for (int i = 0; i < focusOnly.Length; i++)
+                    {
+                        focusOnly[i].gameObject.SetActive(true);
+                    }
                 }
             }
             else if (focused)
@@ -101,8 +150,13 @@ public class DispatchMovementScript : MonoBehaviour, IBeginDragHandler, IDragHan
                 this.GetComponent<Image>().sprite = deskSprite;
                 focused = false;
                 this.transform.localScale = Vector3.one;
-                this.transform.position = spaceLock.draggingPosition;
+                    this.transform.localPosition = new Vector3(-30, -200, 0);
+                
                 spaceLock.withinValidSpace = true;
+                for (int i = 0; i < focusOnly.Length; i++)
+                {
+                    focusOnly[i].gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -112,6 +166,7 @@ public class DispatchMovementScript : MonoBehaviour, IBeginDragHandler, IDragHan
         if (collision.CompareTag("DispatchTube"))
         {
             inTube = true;
+            collision.gameObject.GetComponent<CompareHeroToSheet>().dispatchSheet = this.gameObject;
         }
     }
 
@@ -126,7 +181,10 @@ public class DispatchMovementScript : MonoBehaviour, IBeginDragHandler, IDragHan
     // Start is called before the first frame update
     void Start()
     {
-        
+        deskSpace = GameObject.Find("DeskSpace").transform;
+        focusedSpaceOne = GameObject.Find("FocusSpaceOne").transform;
+        focusedSpaceTwo = GameObject.Find("FocusSpaceTwo").transform;
+        offScreenHolder = GameObject.Find("OffScreenHolder").transform;
     }
 
     // Update is called once per frame

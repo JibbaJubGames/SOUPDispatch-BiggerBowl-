@@ -5,11 +5,13 @@ using TMPro;
 
 public class DispatchTubeContentsChecker : MonoBehaviour
 {
-    public TMP_Text tubeInfo;
     public int profileCount;
     public int dispatchSheetCount;
     public static bool dispatchSheetGiven;
     public static bool profileGiven;
+    [SerializeField] public static bool contentsChecked;
+    [SerializeField] private bool dispatchChecked;
+    [SerializeField] private CompareHeroToSheet comparisonScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,16 @@ public class DispatchTubeContentsChecker : MonoBehaviour
         {
             profileCount = 1;
         }
-        tubeInfo.text = $"DISPATCH SHEET {dispatchSheetCount}/1 \r\n HERO PROFILE {profileCount}/1";
+        if (dispatchSheetGiven && profileGiven && !contentsChecked)
+        {
+            contentsChecked = true;
+            dispatchSheetGiven = false;
+            profileGiven = false;
+            profileCount = 0;
+            dispatchSheetCount = 0;
+            Debug.Log("Comparing sheets");
+            comparisonScript.CompareSheets();
+        }
     }
 
 

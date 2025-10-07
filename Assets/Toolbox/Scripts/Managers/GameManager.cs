@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,10 +17,16 @@ public class GameManager : MonoBehaviour
     public static bool allEndingsUnlocked = false;
     public static bool allCompSkinsUnlocked = false;
 
-    [Header("Basics")] 
+    [Header("Basics")]
+    public static bool isAlpha = true;
+    public GameObject pauseMenu;
+    public bool paused;
+
     public static int DayCounter = 1;
 
     public static int playerEnergy = 5;
+
+    public static string PlayerName;
 
     [Header("Relationships")]
     public static int FawnRelationCounter;
@@ -44,6 +51,9 @@ public class GameManager : MonoBehaviour
     [Header("Finances")]
     public static int moneyInWallet;
 
+    [Header("Prank Addresses")]
+    public static Dictionary<int, bool> prankCallAddresses = new Dictionary<int, bool>();
+
     //[Header("Fallen Heroes")]
 
     private void Awake()
@@ -65,15 +75,122 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("MainMenuScene");
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainMenuScene")
+        {
+            if (pauseMenu == null || pauseMenu != GameObject.FindGameObjectWithTag("PauseMenu"))
+            {
+                pauseMenu = null;
+                pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
+            }
+            if (!paused)
+            {
+                pauseMenu.GetComponent<Animator>().SetTrigger("Paused");
+                Time.timeScale = 0f;
+                paused = true;
+            }
+            else
+            {
+                paused = false;
+                pauseMenu.GetComponent<Animator>().SetTrigger("Unpaused");
+                Time.timeScale = 1f;
+            }
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.C))
         {
             DevConsole.SetActive(true);
             DevConsoleOpen = true;
+        }
+
+        if (Input.GetButton("SeeThroughMode") && FocusHolders.homeObject != null)
+        {
+            GameObject seeThroughOne = FocusHolders.homeObject.transform.GetChild(1).gameObject;
+            if (seeThroughOne.transform.childCount > 0)
+            {
+                for (int i = 0; i < seeThroughOne.transform.childCount; i++)
+                {
+                    if (seeThroughOne.transform.GetChild(i).name == "HeroFolderSlot")
+                    {
+                        for (int j = 0; j < seeThroughOne.transform.GetChild(i).childCount; j++)
+                        {
+                            seeThroughOne.transform.GetChild(i).GetChild(j).GetComponent<Image>().color = new Color(1, 1, 1, .5f);
+                            seeThroughOne.transform.GetChild(i).GetChild(j).GetComponent<Image>().raycastTarget = false;
+                        }
+                    }
+                    else
+                    {
+                        seeThroughOne.transform.GetChild(i).GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+                        seeThroughOne.transform.GetChild(i).GetComponent<Image>().raycastTarget = false;
+                    }
+                }
+            }
+            GameObject seeThroughTwo = FocusHolders.homeObject.transform.GetChild(0).gameObject;
+            if (seeThroughTwo.transform.childCount > 0)
+            {
+                for (int i = 0; i < seeThroughTwo.transform.childCount; i++)
+                {
+                    if (seeThroughTwo.transform.GetChild(i).name == "HeroFolderSlot")
+                    {
+                        for (int j = 0; j < seeThroughTwo.transform.GetChild(i).childCount; j++)
+                        {
+                            seeThroughTwo.transform.GetChild(i).GetChild(j).GetComponent<Image>().color = new Color(1, 1, 1, .5f);
+                            seeThroughTwo.transform.GetChild(i).GetChild(j).GetComponent<Image>().raycastTarget = false;
+                        }
+                    }
+                    else
+                    {
+                        seeThroughTwo.transform.GetChild(i).GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+                        seeThroughTwo.transform.GetChild(i).GetComponent<Image>().raycastTarget = false;
+                    }
+                }
+            }
+        }
+        if (!Input.GetButton("SeeThroughMode") && FocusHolders.homeObject != null)
+        {
+            GameObject seeThroughOne = FocusHolders.homeObject.transform.GetChild(1).gameObject;
+            if (seeThroughOne.transform.childCount > 0)
+            {
+                for (int i = 0; i < seeThroughOne.transform.childCount; i++)
+                {
+                    if (seeThroughOne.transform.GetChild(i).name == "HeroFolderSlot")
+                    {
+                        for (int j = 0; j < seeThroughOne.transform.GetChild(i).childCount; j++)
+                        {
+                            seeThroughOne.transform.GetChild(i).GetChild(j).GetComponent<Image>().color = new Color(1, 1, 1, 1f);
+                            seeThroughOne.transform.GetChild(i).GetChild(j).GetComponent<Image>().raycastTarget = true;
+                        }
+                    }
+                    else
+                    {
+                        seeThroughOne.transform.GetChild(i).GetComponent<Image>().color = new Color(1, 1, 1, 1f);
+                        seeThroughOne.transform.GetChild(i).GetComponent<Image>().raycastTarget = true;
+                    }
+                }
+            }
+            GameObject seeThroughTwo = FocusHolders.homeObject.transform.GetChild(0).gameObject;
+            if (seeThroughTwo.transform.childCount > 0)
+            {
+                for (int i = 0; i < seeThroughTwo.transform.childCount; i++)
+                {
+                    if (seeThroughTwo.transform.GetChild(i).name == "HeroFolderSlot")
+                    {
+                        for (int j = 0; j < seeThroughTwo.transform.GetChild(i).childCount; j++)
+                        {
+                            seeThroughTwo.transform.GetChild(i).GetChild(j).GetComponent<Image>().color = new Color(1, 1, 1, 1f);
+                            seeThroughTwo.transform.GetChild(i).GetChild(j).GetComponent<Image>().raycastTarget = true;
+                        }
+                    }
+                    else
+                    {
+                        seeThroughTwo.transform.GetChild(i).GetComponent<Image>().color = new Color(1, 1, 1, 1f);
+                        seeThroughTwo.transform.GetChild(i).GetComponent<Image>().raycastTarget = true;
+                    }
+                }
+            }
         }
     }
 
@@ -92,6 +209,8 @@ public class GameManager : MonoBehaviour
     public static void SetPlayerSave()
     {
         DayCounter = SaveAndLoad.playerSave.DayCounter;
+        playerEnergy = SaveAndLoad.playerSave.PlayerEnergy;
+        PlayerName = SaveAndLoad.playerSave.PlayerName;
 
         FawnRelationCounter = SaveAndLoad.playerSave.FawnRelationCounter;
         FawnRelationLevel = SaveAndLoad.playerSave.FawnRelationLevel;
@@ -112,11 +231,20 @@ public class GameManager : MonoBehaviour
 
         moneyInWallet = SaveAndLoad.playerSave.moneyInWallet;
 
+        for ( int i = 0; i < 130; i++)
+        {
+            if (SaveAndLoad.playerSavePranks.prankingAddresses[i] != 0 && !prankCallAddresses.ContainsKey(SaveAndLoad.playerSavePranks.prankingAddresses[i]))
+            {
+                prankCallAddresses.Add(SaveAndLoad.playerSavePranks.prankingAddresses[i], true);
+            }
+        }
     }
 
     public static void NewGameSave()
     {
         DayCounter = 1;
+        playerEnergy = 5;
+        PlayerName = null;
 
         FawnRelationCounter = 0;
         FawnRelationLevel= 0;
@@ -138,6 +266,8 @@ public class GameManager : MonoBehaviour
         moneyInWallet = 0;
 
         SaveAndLoad.SaveToJson();
+
+        SaveAndLoad.NewSavePrankInfo();
 
         SaveAndLoad.LoadFromJson();
     }

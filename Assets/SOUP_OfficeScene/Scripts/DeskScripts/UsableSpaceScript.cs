@@ -28,12 +28,10 @@ public class UsableSpaceScript : MonoBehaviour
         if (collision.CompareTag("InvalidSpace"))
         {
             withinValidSpace = false;
-            Debug.Log("Can't place here");
         }
         else if (collision.CompareTag("ValidSpace"))
         {
             withinValidSpace = true;
-            Debug.Log("Can place here");
         }
     }
 }

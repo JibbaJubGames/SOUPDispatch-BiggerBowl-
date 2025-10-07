@@ -18,6 +18,7 @@ TagManager:
   - DispatchTube
   - HeroProfile
   - DispatchSheet
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

@@ -9,51 +9,51 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenuScene.unity
     guid: e9de01cb2d7d68846a52abe34978f640
   - enabled: 1
-    path: Assets/Scenes/OldOfficeScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+    path: Assets/Scenes/OfficeScene.unity
+    guid: 578178577c00eb24584c7e7e5e7781af
+  - enabled: 0
     path: Assets/Scenes/AlleyScene.unity
     guid: 768b452bc23caad4fb2d62863db88f0d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ApartmentScene.unity
     guid: f6de4e66a5cf1204b84e0f2d2c9e5213
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/TransitionCutscenes/ApartmentToAlley.unity
     guid: e4192d0740511ea458673149ef10c065
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/TransitionCutscenes/AlleyToApartment.unity
     guid: a72c16f3868654a488b2e1b99f557fc3
   - enabled: 1
     path: Assets/Scenes/Cutscenes/TransitionCutscenes/ApartmentToOffice.unity
     guid: 0f1b1531066a304499bd75ef35021779
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/TransitionCutscenes/OfficeToApartment.unity
     guid: 777245c7b06e78d4796ccab591ae7bd5
   - enabled: 1
-    path: Assets/Scenes/Cutscenes/StoryCutscenes/Day1Cutscene_TheInterview.unity
+    path: Assets/Scenes/Cutscenes/StoryCutscenes/DayOneCutscene/Day1Cutscene_TheInterview.unity
     guid: ca558d466be08bf418d327553a59846a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/StoryCutscenes/Day4Cutscene_APromotionOfSorts.unity
     guid: 93cd37d865b5acb41a60284c22b56d49
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/StoryCutscenes/Day10Cutscene_AnOfferYouCantRefuse.unity
     guid: 6ab53e4a6a907fa4e948aa4a632a666d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/StoryCutscenes/Day14Cutscene_CheckForLosers.unity
     guid: 288cb7fc66b07084fa27672996499ba5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/StoryCutscenes/Day25Cutscene_DaveRevealed.unity
     guid: 34a062bc375ed4e4da77fec58a6bf8fd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/EndingCutscenes/EndingCutscene_DaveDefeatsAllEnding.unity
     guid: d42e03b8144164b4a9b2715008546ab8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/EndingCutscenes/EndingCutscene_DaveDefeatedEnding.unity
     guid: 8065277cae8761f4b9d2ccf9e638eb94
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cutscenes/CreditsScene/CreditsScene.unity
     guid: 74856ccb40495a14e8836f2a61c3c275
-  - enabled: 1
-    path: Assets/Scenes/OfficeScene.unity
-    guid: 578178577c00eb24584c7e7e5e7781af
+  - enabled: 0
+    path: Assets/Scenes/OldOfficeScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects: {}

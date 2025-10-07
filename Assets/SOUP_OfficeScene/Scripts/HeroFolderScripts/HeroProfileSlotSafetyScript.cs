@@ -24,7 +24,7 @@ public class HeroProfileSlotSafetyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckFolderSlot();
     }
 
     public void CheckFolderSlot()

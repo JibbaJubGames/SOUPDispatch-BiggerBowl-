@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class CutsceneManager : MonoBehaviour
 {
     private bool initialized = false;
-    public static Dictionary<int, int> CutsceneDays = new Dictionary<int, int>();
+    public static Dictionary<int, string> CutsceneDays = new Dictionary<int, string>();
     public int[] daysWithCutscene;
-    public int[] cutsceneSceneID;
+    public string[] cutsceneSceneID;
 
     // Start is called before the first frame update
     void Start()

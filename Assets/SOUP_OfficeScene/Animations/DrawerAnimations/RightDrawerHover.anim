@@ -23,7 +23,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -30
+        value: -70
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: RightDrawer
+    path: RightDrawerUsable
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -44,7 +44,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: -20
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -55,7 +55,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: LeftDrawer
+    path: LeftDrawerUsable
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -65,7 +65,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: -20
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -76,7 +76,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: CenterDrawer
+    path: CenterDrawerUsable
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -89,7 +89,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 653443964
+      path: 2907711331
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
@@ -98,7 +98,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 472222755
+      path: 408204223
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
@@ -107,7 +107,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 4282960454
+      path: 4114006424
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
@@ -143,7 +143,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -30
+        value: -70
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -154,7 +154,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: RightDrawer
+    path: RightDrawerUsable
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -164,7 +164,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: -20
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -175,7 +175,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: LeftDrawer
+    path: LeftDrawerUsable
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -185,7 +185,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: -20
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -196,7 +196,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: CenterDrawer
+    path: CenterDrawerUsable
     classID: 224
     script: {fileID: 0}
     flags: 0

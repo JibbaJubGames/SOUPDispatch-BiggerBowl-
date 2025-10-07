@@ -10,7 +10,8 @@ public class CheckWinScript : MonoBehaviour
 
     public static Animator statusAnim;
 
-    public PlayerResponses addressTrigger;
+    //Update this to give the player the address from the operator 
+    public GenerateDispatchScript addressSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,6 @@ public class CheckWinScript : MonoBehaviour
 
     public void BeatMazePlayerResponse()
     {
-        addressTrigger.AddressMinigameResult(1);
+        addressSpawn.GetComponent<AddressRandomizationScript>().GenAddress();
     }
 }
